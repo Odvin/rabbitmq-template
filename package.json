@@ -1,0 +1,27 @@
+{
+  "name": "rabbitmq-template",
+  "version": "1.0.0",
+  "description": "Using RabbitMQ with a NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Odvin/rabbitmq-template.git"
+  },
+  "keywords": [
+    "rabbitmq",
+    "node",
+    "js"
+  ],
+  "author": "Dmytro Ovchynnykov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Odvin/rabbitmq-template/issues"
+  },
+  "homepage": "https://github.com/Odvin/rabbitmq-template#readme",
+  "dependencies": {
+    "amqplib": "^0.5.5"
+  }
+}
