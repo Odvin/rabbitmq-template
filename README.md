@@ -27,10 +27,10 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     node ./simple-queue/consumer.js
     ```
     It is possible to run the producer several times to send the massage again.
-2. Work queue:
+2. Work queue (Distributing tasks among workers):
     ```
                                  | -> Consumer01   
-    Producer -> [m01][m02][m03] -|
+    Producer -> [m01][m02][m03] -| OR
                                  | -> Consumer02
     ```
     Messages are balanced, acknowledgments required.
@@ -44,3 +44,20 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     node ./work-queues/producer.js Some message....
     ```
     The dots set the time for the consumer to finish the task.
+
+3. Publish/Subscribe (Sending messages to many consumers at once):
+    ```
+                                             | -> Consumer01   
+    Producer -> [m01][m02][m03] -> Exchange -| AND
+                                             | -> Consumer02
+    ```
+    Used *fanout* type of the exchange.
+
+    Start several consumers in different terminals.
+    ```
+    node publish-subscribe/consumer.js
+    ```
+    To send a message:
+    ```
+    node publish-subscribe/producer.js Some message
+    ```
