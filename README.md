@@ -26,7 +26,7 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     ```
     node ./simple-queue/consumer.js
     ```
-    It is possible to run the producer several times to send the massage again.
+    It is possible to run the producer several times to send the message again.
 2. Work queue (Distributing tasks among workers):
     ```
                                  | -> Consumer01   
@@ -60,4 +60,21 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     To send a message:
     ```
     node publish-subscribe/producer.js Some message
+    ```
+
+4. Routing (Receiving messages selectively):
+    ```
+                                                            | (Routing key filter) -> Consumer01   
+    Producer -> [m01, key][m02, key][m03, key] -> Exchange -| AND
+                                                            | (Routing key filter) -> Consumer02
+    ```
+    Used *direct* type of the exchange.
+
+    Start several consumers in different terminals.
+    ```
+    node routing/consumer.js [error | info | warning]
+    ```
+    To send a message:
+    ```
+    node publish-subscribe/producer.js [error | info | warning] "Some message"
     ```

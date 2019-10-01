@@ -5,13 +5,13 @@ async function main() {
   const channel = await connection.createChannel();
 
   const queue = 'simpleQueue';
-  const massage = 'Hello Rabbit!';
+  const message = 'Hello Rabbit!';
 
   await channel.assertQueue(queue, { durable: false });
 
-  channel.sendToQueue(queue, Buffer.from(massage));
+  channel.sendToQueue(queue, Buffer.from(message));
 
-  console.log(`Massage: ${massage} was sent to the Queue - ${queue}`);
+  console.log(`Message: ${message} was sent to the Queue - ${queue}`);
 
   setTimeout(() => {
     connection.close();
