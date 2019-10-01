@@ -2,22 +2,18 @@
 Using RabbitMQ with a NodeJS
 
 ## Prerequisites
-----
-Docker and Node are required.
+Docker, Docker-Compose and Node are required.
 
 
 ## Usage
------
-
 Run RabbitMQ as local server.
 ```
-docker run -d --hostname rabbit --name rabbit -p 8080:15672 -p 5672:5672 rabbitmq:3-management
+docker-compose up
 ```
 
-It is possible to use management plugin go to `http://localhost:8080` or `http://host-ip:8080` in a browser with the default username and password of *guest / guest*.
+To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` in a browser with the default username and password of *guest / guest*.
 
 ## Examples
----
 1. Simple queue:
     ```
     Producer -> [m01][m02][m03] -> Consumer
@@ -31,3 +27,20 @@ It is possible to use management plugin go to `http://localhost:8080` or `http:/
     node ./simple-queue/consumer.js
     ```
     It is possible to run the producer several times to send the massage again.
+2. Work queue:
+    ```
+                                 | -> Consumer01   
+    Producer -> [m01][m02][m03] -|
+                                 | -> Consumer02
+    ```
+    Messages are balanced, acknowledgments required.
+
+    Start several consumers in different terminals.
+    ```
+    node ./work-queues/consumer.js
+    ```
+    To send a message:
+    ```
+    node ./work-queues/producer.js Some message....
+    ```
+    The dots set the time for the consumer to finish the task.

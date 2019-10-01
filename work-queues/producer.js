@@ -4,12 +4,12 @@ async function main() {
   const connection = await amqp.connect('amqp://localhost');
   const channel = await connection.createChannel();
 
-  const queue = 'simpleQueue';
-  const massage = 'Hello Rabbit!';
+  const queue = 'workQueue';
+  const massage = process.argv.slice(2).join(' ') || 'Hello Rabbit!';
 
-  await channel.assertQueue(queue, { durable: false });
+  await channel.assertQueue(queue, { durable: true });
 
-  channel.sendToQueue(queue, Buffer.from(massage));
+  channel.sendToQueue(queue, Buffer.from(massage), { persistent: true });
 
   console.log(`Massage: ${massage} was sent to the Queue - ${queue}`);
 
