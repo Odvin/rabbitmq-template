@@ -72,9 +72,34 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
 
     Start several consumers in different terminals.
     ```
-    node routing/consumer.js [error | info | warning]
+    node routing/consumer.js error
+    node routing/consumer.js info
+    node routing/consumer.js warning
     ```
     To send a message:
     ```
-    node publish-subscribe/producer.js [error | info | warning] "Some message"
+    node publish-subscribe/producer.js error "Some error message"
+    node publish-subscribe/producer.js info "Some info message"
+    node publish-subscribe/producer.js warning "Some warning message"
+    ```
+
+5. Topics (Receiving messages based on a pattern):
+    ```
+                                                            | (Routing pattern) -> Consumer01   
+    Producer -> [m01, key][m02, key][m03, key] -> Exchange -| AND
+                                                            | (Routing pattern) -> Consumer02
+    ```
+    Used *topic* type of the exchange.
+
+    Start several consumers in different terminals.
+    ```
+    node topics/consumer.js "#"
+    node topics/consumer.js "kern.*"
+    node topics/consumer.js "*.critical"
+    node topics/consumer.js "kern.*" "*.critical"
+    ```
+    To send a message:
+    ```
+    node topics/producer.js "kern.critical" "A critical kernel error"
+    node topics/producer.js "kern.info" "A critical kernel info"
     ```
