@@ -10,6 +10,8 @@ Docker, Docker-Compose and Node are required.
 ## Usage
 Run RabbitMQ as local server.
 ```
+cd rabbitmq-template/
+npm i
 docker-compose up
 ```
 
