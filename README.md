@@ -119,7 +119,7 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     node rpc/server.js
     node rpc/server.js
     ```
-    To client.
+    Start client.
     ```
     node rpc/client.js 30
     ```
