@@ -1,6 +1,8 @@
 # rabbitmq-template
 Using RabbitMQ with a NodeJS
 
+The examples illustrate official RabbitMQ tutorials using modern JavaScript syntax.
+
 ## Prerequisites
 Docker, Docker-Compose and Node are required.
 
@@ -102,4 +104,22 @@ To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` 
     ```
     node topics/producer.js "kern.critical" "A critical kernel error"
     node topics/producer.js "kern.info" "A critical kernel info"
+    ```
+
+6. RPC (Request/reply pattern):
+    ```
+            | -> [req01][req02][req03] -> |   
+    Client -|                             | Server (req) => res
+            | <- [res01][res02][key03] <- |
+    ```
+    Used *RPC* type of the exchange.
+
+    Start server (it is possible to start several servers in the different terminals).
+    ```
+    node rpc/server.js
+    node rpc/server.js
+    ```
+    To client.
+    ```
+    node rpc/client.js 30
     ```
