@@ -12,7 +12,7 @@ Run RabbitMQ as local server.
 ```
 cd rabbitmq-template/
 npm i
-docker-compose up
+docker-compose up -d
 ```
 
 To use management plugin go to `http://localhost:8080` or `http://host-ip:8080` in a browser with the default username and password of *guest / guest*.
